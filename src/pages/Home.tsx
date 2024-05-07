@@ -5,9 +5,12 @@ import Island from "../models/Island.tsx";
 import Sky from "../models/Sky.tsx";
 import Bird from "../models/Bird.tsx";
 import Plane from "../models/Plane.tsx";
+import HomeInfo from "../components/HomeInfo.tsx";
 
 const HomePage = () => {
     const [isRotating, setIsRotating] = useState(false);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [currentStage, setCurrentStage] = useState<number | null>(1);
 
     const adjustIslandForScreenSize = () => {
         const islandPosition: Vector3 = [0, -6.5, -43];
@@ -34,8 +37,8 @@ const HomePage = () => {
 
     return (
         <section className="w-full h-screen relative">
-            <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
-                Pop UP
+            <div className='absolute top-28 left-0 right-0 z-10 flex items-center justify-center'>
+                {currentStage && <HomeInfo currentStage={currentStage}/>}
             </div>
             <Canvas
                 className={`w-full h-full bg-transparent ${isRotating ? 'cursor-grabbing' : 'cursor-grab'}`}
@@ -51,7 +54,7 @@ const HomePage = () => {
                     <ambientLight intensity={0.2}/>
                     <hemisphereLight color="#b1e1ff" groundColor="#000000"/>
                     <Bird/>
-                    <Sky/>
+                    <Sky isRotating={isRotating}/>
                     <Plane
                         planePosition={planePosition}
                         planeScale={planeScale}
@@ -63,6 +66,7 @@ const HomePage = () => {
                         rotation={rotation}
                         setIsRotating={setIsRotating}
                         isRotating={isRotating}
+                        setCurrentStage={setCurrentStage}
                     />
                 </Suspense>
             </Canvas>
