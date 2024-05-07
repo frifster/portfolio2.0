@@ -3,6 +3,7 @@ import {Suspense} from "react";
 import Loader from "../components/Loader.tsx";
 import Island from "../models/Island.tsx";
 import Sky from "../models/Sky.tsx";
+import Bird from "../models/Bird.tsx";
 
 const HomePage = () => {
     const adjustIslandForScreenSize = () => {
@@ -36,6 +37,7 @@ const HomePage = () => {
                     ]} intensity={1.6}/>
                     <ambientLight intensity={0.2}/>
                     <hemisphereLight color="#b1e1ff" groundColor="#000000"/>
+                    <Bird/>
                     <Sky/>
                     <Island
                         position={islandPosition}
