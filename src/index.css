@@ -7,6 +7,9 @@
 :root {
     --blue-rgb: 237 245 255;
     --green-rgb: 125 161 35;
+    --neo-green: #0D3500;
+    --light-green: #1D5E00;
+    --lightest-green-rgba: rgba(61, 159, 0, 0.2);
 }
 
 body {
@@ -67,11 +70,11 @@ body:has(.card[data-color="green"]:hover) {
     }
 
     .info-box {
-        @apply mx-5 relative flex text-white flex-col gap-3 max-w-2xl neo-brutalism-blue pt-4 pb-12 px-8;
+        @apply mx-5 relative flex text-white flex-col gap-3 max-w-2xl neo-brutalism-green pt-4 pb-12 px-8;
     }
 
     .neo-btn {
-        @apply py-3 px-6 rounded-lg text-blue-500 text-center font-semibold sm:w-1/2 w-[90%] -bottom-5 absolute mx-auto right-0 left-0 flex justify-center items-center gap-3;
+        @apply py-3 px-6 rounded-lg text-green-950 text-center font-semibold sm:w-1/2 w-[90%] -bottom-5 absolute mx-auto right-0 left-0 flex justify-center items-center gap-3;
     }
 
     .cta {
@@ -170,18 +173,19 @@ body:has(.card[data-color="green"]:hover) {
 }
 
 /* Neo Brutalism */
-.neo-brutalism-blue {
-    background: #2b77e7;
-    position: relative;
-    border-radius: 10px;
-    border: #2b77e7;
-    box-shadow: 0.6vmin 0.6vmin #336cc1, 1vmin 1vmin #0092db, 1vmin 1vmin #0092db,
-    0.65vmin 1vmin #0092db, 1vmin 0.65vmin #0092db;
+.neo-brutalism-green {
+    background: var(--neo-green);
+    border: var(--neo-green);
+    box-shadow: 0.6vmin 0.6vmin var(--lightest-green-rgba),
+    1vmin 1vmin var(--lightest-green-rgba),
+    1vmin 1vmin var(--lightest-green-rgba),
+    0.65vmin 1vmin var(--lightest-green-rgba),
+    1vmin 0.65vmin var(--lightest-green-rgba);
 }
 
 .neo-brutalism-white {
     background: #fff;
     border: #fff;
-    box-shadow: 0.6vmin 0.6vmin #fff, 1vmin 1vmin #d2e4ff, 1vmin 1vmin #d2e4ff,
-    0.65vmin 1vmin #d2e4ff, 1vmin 0.65vmin #d2e4ff;
+    box-shadow: 0.6vmin 0.6vmin #fff, 1vmin 1vmin var(--lightest-green-rgba), 1vmin 1vmin var(--lightest-green-rgba),
+    0.65vmin 1vmin var(--lightest-green-rgba), 1vmin 0.65vmin var(--lightest-green-rgba);
 }
