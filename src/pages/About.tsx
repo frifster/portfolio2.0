@@ -51,12 +51,9 @@ const About = () => {
     const credentials = useQuery({
         queryKey: ['credentials'],
         queryFn: async () => {
-            const {academics, businesses, projects, workExperiences}: any = await getCredentials;
+            const {workExperiences}: any = await getCredentials;
 
             return {
-                academics,
-                businesses,
-                projects,
                 workExperiences
             }
         },
