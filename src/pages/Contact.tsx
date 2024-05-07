@@ -5,11 +5,12 @@ import Fox from "../models/Fox";
 import useAlert from "../hooks/useAlert";
 import Alert from "../components/Alert";
 import Loader from "../components/Loader";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
     const formRef = useRef();
     const [form, setForm] = useState({name: "", email: "", message: ""});
-    const {alert} = useAlert();
+    const {alert, showAlert, hideAlert} = useAlert();
     const [loading, setLoading] = useState(false);
     const [currentAnimation, setCurrentAnimation] = useState("idle");
 
@@ -26,7 +27,68 @@ const Contact = () => {
         e.preventDefault();
         setLoading(true);
         setCurrentAnimation("hit");
+
+        sendEmail();
     };
+
+    const sendEmail = async () => {
+        if (!import.meta.env.VITE_APP_EMAILJS_SERVICE_ID) {
+            console.error("EmailJS Service ID is missing");
+            return;
+        }
+
+        if (!import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID) {
+            console.error("EmailJS Template ID is missing");
+            return;
+        }
+
+        if (!import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY) {
+            console.error("EmailJS Public Key is missing");
+            return;
+        }
+
+        try {
+
+
+            await emailjs
+                .send(
+                    import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+                    import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+                    {
+                        from_name: form.name,
+                        from_email: form.email,
+                        message: form.message,
+                    },
+                    import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
+                )
+
+            setLoading(false);
+            showAlert({
+                text: "Thank you for your message 😃",
+                type: "success",
+            });
+
+            setTimeout(() => {
+                hideAlert();
+                setCurrentAnimation("idle");
+                setForm({
+                    name: "",
+                    email: "",
+                    message: "",
+                });
+            }, 3000);
+        } catch (error) {
+            setLoading(false);
+            console.error(error);
+            setCurrentAnimation("idle");
+
+            showAlert({
+                text: "I didn't receive your message 😢",
+                type: "danger",
+            });
+        }
+
+    }
 
     return (
         <section className='relative flex lg:flex-row flex-col max-container'>
