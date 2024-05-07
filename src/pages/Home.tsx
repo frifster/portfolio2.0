@@ -1,5 +1,5 @@
 import {Canvas, Vector3, Euler} from "@react-three/fiber";
-import {Suspense} from "react";
+import {Suspense, useState} from "react";
 import Loader from "../components/Loader.tsx";
 import Island from "../models/Island.tsx";
 import Sky from "../models/Sky.tsx";
@@ -7,6 +7,8 @@ import Bird from "../models/Bird.tsx";
 import Plane from "../models/Plane.tsx";
 
 const HomePage = () => {
+    const [isRotating, setIsRotating] = useState(false);
+
     const adjustIslandForScreenSize = () => {
         const islandPosition: Vector3 = [0, -6.5, -43];
         const islandScale: Vector3 = window.innerWidth < 768 ? [0.9, 0.9, 0.9] : [1, 1, 1];
@@ -18,7 +20,17 @@ const HomePage = () => {
         }
     }
 
+    const adjustPlaneForScreenSize = () => {
+        const planePosition: Vector3 = window.innerWidth < 768 ? [0, -1.5, 0] : [0, -4, -4];
+        const planeScale: Vector3 = window.innerWidth < 768 ? [0.9, 0.9, 0.9] : [3, 3, 3];
+        return {
+            planeScale,
+            planePosition,
+        }
+    }
+
     const {islandScale, islandPosition, rotation} = adjustIslandForScreenSize();
+    const {planeScale, planePosition} = adjustPlaneForScreenSize();
 
     return (
         <section className="w-full h-screen relative">
@@ -26,7 +38,7 @@ const HomePage = () => {
                 Pop UP
             </div>
             <Canvas
-                className="w-full h-screen bg-transparent"
+                className={`w-full h-full bg-transparent ${isRotating ? 'cursor-grabbing' : 'cursor-grab'}`}
                 camera={{
                     near: 0.1,
                     far: 1000,
@@ -40,11 +52,16 @@ const HomePage = () => {
                     <hemisphereLight color="#b1e1ff" groundColor="#000000"/>
                     <Bird/>
                     <Sky/>
-                    <Plane/>
+                    <Plane
+                        planePosition={planePosition}
+                        planeScale={planeScale}
+                    />
                     <Island
                         position={islandPosition}
                         scale={islandScale}
                         rotation={rotation}
+                        setIsRotating={setIsRotating}
+                        isRotating={isRotating}
                     />
                 </Suspense>
             </Canvas>
