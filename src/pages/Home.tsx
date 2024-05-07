@@ -1,19 +1,21 @@
-import {Canvas, Vector3} from "@react-three/fiber";
+import {Canvas, Vector3, Euler} from "@react-three/fiber";
 import {Suspense} from "react";
 import Loader from "../components/Loader.tsx";
 import Island from "../models/Island.tsx";
 
 const HomePage = () => {
     const adjustIslandForScreenSize = () => {
-        const screenPosition: Vector3 = [0, -6.5, -43];
-        const screenScale: Vector3 = window.innerWidth < 768 ? [0.9, 0.9, 0.9] : [1, 1, 1];
+        const islandPosition: Vector3 = [0, -6.5, -43];
+        const islandScale: Vector3 = window.innerWidth < 768 ? [0.9, 0.9, 0.9] : [1, 1, 1];
+        const rotation: Euler = [0.1, 4.7, 0];
         return {
-            screenScale,
-            screenPosition
+            islandScale,
+            islandPosition,
+            rotation
         }
     }
 
-    const {screenScale, screenPosition} = adjustIslandForScreenSize();
+    const {islandScale, islandPosition, rotation} = adjustIslandForScreenSize();
 
     return (
         <section className="w-full h-screen relative">
@@ -28,10 +30,15 @@ const HomePage = () => {
                 }}
             >
                 <Suspense fallback={<Loader/>}>
-                    <ambientLight/>
+                    <directionalLight position={[
+                        1, 10, 10
+                    ]} intensity={1.6}/>
+                    <ambientLight intensity={0.2}/>
+                    <hemisphereLight color="#b1e1ff" groundColor="#000000"/>
                     <Island
-                        position={screenPosition}
-                        scale={screenScale}
+                        position={islandPosition}
+                        scale={islandScale}
+                        rotation={rotation}
                     />
                 </Suspense>
             </Canvas>
