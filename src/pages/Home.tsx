@@ -55,6 +55,7 @@ const HomePage = () => {
                     <Plane
                         planePosition={planePosition}
                         planeScale={planeScale}
+                        isRotating={isRotating}
                     />
                     <Island
                         position={islandPosition}
