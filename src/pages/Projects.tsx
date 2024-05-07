@@ -100,7 +100,7 @@ const Projects = () => {
             <div className='flex flex-wrap my-20 gap-16'>
                 {projects?.map((project, index) => (
                     <div className='lg:w-[400px] w-full' key={project.title}>
-                        <div className='block-container w-12 h-12'>
+                        <div className='block-container w-12 h-12 glass-morphism'>
                             <div
                                 className={`btn-back rounded-xl ${timeLineIcons[index % timeLineIcons.length].theme}`}/>
                             <div className='btn-front rounded-xl flex justify-center items-center'>
