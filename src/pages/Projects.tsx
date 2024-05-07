@@ -116,7 +116,15 @@ const Projects = () => {
                             <h4 className='text-2xl font-poppins font-semibold'>
                                 {project.title}
                             </h4>
-                            <p className='mt-2 text-slate-500'>{project.projectDesc || ""}</p>
+                            <ul>
+                                {
+                                    project.projectDesc?.map((desc, index) => (
+                                        <li key={index} className='text-slate-500 mt-2 text-pretty'>
+                                            ✅ {desc}
+                                        </li>
+                                    ))
+                                }
+                            </ul>
                             <div className='mt-5 flex items-center gap-2 font-poppins'>
                                 <Link
                                     to={project.link}
