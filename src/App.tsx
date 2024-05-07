@@ -1,6 +1,7 @@
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Navbar from "./components/Navbar.tsx";
 import HomePage from "./pages/Home.tsx";
+import Contact from "./pages/Contact.tsx";
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
                   <Route path="/" element={<HomePage/>}/>
                   <Route path="/about" element="About"/>
                   <Route path="/projects" element="Projects"/>
-                  <Route path="/contact" element="Contact"/>
+                  <Route path="/contact" element={<Contact/>}/>
               </Routes>
           </Router>
       </main>
