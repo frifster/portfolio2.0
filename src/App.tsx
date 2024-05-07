@@ -14,7 +14,7 @@ const queryClient = new QueryClient()
 function App() {
   return (
       <QueryClientProvider client={queryClient}>
-          <main className="bg-slate-300/20">
+          <main className="bg-slate-300/20 h-screen">
               <Router>
                   <Navbar/>
                   <Routes>

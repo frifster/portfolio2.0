@@ -118,7 +118,7 @@ const About = () => {
                                 contentStyle={{
                                     borderBottom: "8px",
                                     borderStyle: "solid",
-                                    // borderBottomColor: experience.iconBg,
+                                    borderBottomColor: verticalTimelineIcons[index % 4].bg,
                                     boxShadow: "none",
                                 }}
                             >
