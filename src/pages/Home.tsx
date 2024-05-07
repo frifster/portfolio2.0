@@ -4,6 +4,7 @@ import Loader from "../components/Loader.tsx";
 import Island from "../models/Island.tsx";
 import Sky from "../models/Sky.tsx";
 import Bird from "../models/Bird.tsx";
+import Plane from "../models/Plane.tsx";
 
 const HomePage = () => {
     const adjustIslandForScreenSize = () => {
@@ -39,6 +40,7 @@ const HomePage = () => {
                     <hemisphereLight color="#b1e1ff" groundColor="#000000"/>
                     <Bird/>
                     <Sky/>
+                    <Plane/>
                     <Island
                         position={islandPosition}
                         scale={islandScale}
